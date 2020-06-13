@@ -1,3 +1,48 @@
+$background : #36393f;
+$user-block : #2f3136;
+$shadow : rgba(0, 0, 0, 0.77);
+
 * {
-    background-color: black;
+  margin: 0px;
+  padding: 0px;
+}
+
+.box-user {
+  padding: 80px 0 0 150px;
+  display: flex;
+  flex-direction: column;
+  background-color: $background;
+}
+
+.block {
+  width: 500px;
+  border-radius: 30px;
+  background-color: $user-block;
+  padding: 11px;
+  margin: 1px;
+  display: flex;
+  flex-direction: column;
+}
+
+.user-block {
+  display: flex;
+  flex-direction: row;
+  &__img {
+    width: 40px;
+    height: 40px;
+    border-radius: 30px;
+  }
+  &__user-name {
+    margin: 10px 0 0 10px;
+    font-size: 18px;
+    color: #fff;
+  }
+}
+
+.block:hover {
+  position: relative;
+  webkit-box-shadow: 1px 3px 8px 7px $shadow;
+  -moz-box-shadow: 1px 3px 8px 7px $shadow;
+  box-shadow: 1px 3px 8px 7px $shadow;
+  height: 100px;
 }

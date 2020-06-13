@@ -1,5 +1,46 @@
 * {
-  background-color: black;
+  margin: 0px;
+  padding: 0px;
+}
+
+.box-user {
+  padding: 80px 0 0 150px;
+  display: flex;
+  flex-direction: column;
+  background-color: #36393f;
+}
+
+.block {
+  width: 500px;
+  border-radius: 30px;
+  background-color: #2f3136;
+  padding: 11px;
+  margin: 1px;
+  display: flex;
+  flex-direction: column;
+}
+
+.user-block {
+  display: flex;
+  flex-direction: row;
+}
+.user-block__img {
+  width: 40px;
+  height: 40px;
+  border-radius: 30px;
+}
+.user-block__user-name {
+  margin: 10px 0 0 10px;
+  font-size: 18px;
+  color: #fff;
+}
+
+.block:hover {
+  position: relative;
+  webkit-box-shadow: 1px 3px 8px 7px rgba(0, 0, 0, 0.77);
+  -moz-box-shadow: 1px 3px 8px 7px rgba(0, 0, 0, 0.77);
+  box-shadow: 1px 3px 8px 7px rgba(0, 0, 0, 0.77);
+  height: 100px;
 }
 
 /*# sourceMappingURL=style.css.map */
