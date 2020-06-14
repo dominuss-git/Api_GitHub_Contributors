@@ -1,17 +1,26 @@
-$background : #36393f;
-$user-block : #2f3136;
-$shadow : rgba(0, 0, 0, 0.77);
+$background: #36393f;
+$user-block: #2f3136;
+$shadow: rgba(0, 0, 0, 0.77);
+$bronze: #9f6c35;
+$silver: #7c7c7c;
+$gold: #d2a749;
 
 * {
   margin: 0px;
   padding: 0px;
 }
 
+.body {
+  display: flex;
+  flex-direction: row;
+  background-color: $background;
+}
+
 .box-user {
+  font-size: 100px;
   padding: 80px 0 0 150px;
   display: flex;
   flex-direction: column;
-  background-color: $background;
 }
 
 .block {
@@ -27,6 +36,7 @@ $shadow : rgba(0, 0, 0, 0.77);
 .user-block {
   display: flex;
   flex-direction: row;
+  position: relative;
   &__img {
     width: 40px;
     height: 40px;
@@ -37,6 +47,25 @@ $shadow : rgba(0, 0, 0, 0.77);
     font-size: 18px;
     color: #fff;
   }
+  &__status {
+    position: absolute;
+    display: none;
+    font-size: 30px;
+    right: 10px;
+    top: 5px;
+  }
+}
+
+.bronze {
+  color: $bronze;
+}
+
+.silver {
+  color: $silver;
+}
+
+.gold {
+  color: $gold;
 }
 
 .block:hover {
@@ -45,4 +74,47 @@ $shadow : rgba(0, 0, 0, 0.77);
   -moz-box-shadow: 1px 3px 8px 7px $shadow;
   box-shadow: 1px 3px 8px 7px $shadow;
   height: 100px;
+  .user-block__status {
+    display: block;
+  }
+}
+
+.menu-box {
+  display: flex;
+  flex-direction: column;
+  background-color: $user-block;
+  padding: 20px;
+  margin: 80px 0 auto 20%;
+  border-radius: 20px;
+  &__text {
+    text-align: center;
+    color: #fff;
+    font-size: 25px;
+  }
+}
+.menu-box:hover {
+  padding: 0px;
+  .sort-box__field {
+    display: flex;
+  }
+}
+
+.sort-box {
+  text-align: center;
+  color: #fff;
+  &__field {
+    display: none;
+    font-size: 18px;
+    // padding: 5px 0 0 0;
+    padding: 20px;
+  }
+  &__field:hover {
+    position: relative;
+    webkit-box-shadow: 1px 3px 8px 7px $shadow;
+    -moz-box-shadow: 1px 3px 8px 7px $shadow;
+    box-shadow: 1px 3px 8px 7px $shadow;
+  }
+  &__last-field {
+    border-radius: 0 0 20px 20px;
+  }
 }
