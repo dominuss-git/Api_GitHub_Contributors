@@ -45,6 +45,7 @@ $gold: #d2a749;
   &__user-name {
     margin: 10px 0 0 10px;
     font-size: 18px;
+    white-space: nowrap;
     color: #fff;
   }
   &__status {
@@ -79,15 +80,40 @@ $gold: #d2a749;
   }
 }
 
+.menu-up {
+  display: none;
+  position: relative;
+  flex-direction: column;
+  background-color: $user-block;
+  padding: 20px;
+  margin: 20px auto auto 30px;
+  border-radius: 20px;
+  &__text {
+    text-align: center;
+    white-space: nowrap;
+    color: #fff;
+    font-size: 25px;
+  }
+}
+.menu-up:hover {
+  padding: 0px;
+  .sort-box__field {
+    display: flex;
+  }
+}
+
 .menu-box {
   display: flex;
   flex-direction: column;
   background-color: $user-block;
   padding: 20px;
-  margin: 80px 0 auto 20%;
+  margin: 80px auto auto auto;
+  left: auto;
+  right: 10px;
   border-radius: 20px;
   &__text {
     text-align: center;
+    white-space: nowrap;
     color: #fff;
     font-size: 25px;
   }
@@ -105,7 +131,7 @@ $gold: #d2a749;
   &__field {
     display: none;
     font-size: 18px;
-    // padding: 5px 0 0 0;
+    white-space: nowrap;
     padding: 20px;
   }
   &__field:hover {
@@ -116,5 +142,41 @@ $gold: #d2a749;
   }
   &__last-field {
     border-radius: 0 0 20px 20px;
+  }
+}
+
+@media (max-width: 850px) {
+  .sort-box {
+    &__field {
+      font-size: 13px;
+    }
+  }
+  .menu-box {
+    margin: 20px auto auto auto;
+  }
+  .box-user {
+    padding: 20px 0 0 30px;
+  }
+}
+
+@media (max-width: 730px) {
+  .box-user {
+    padding: 20px 0 0 20px;
+  }
+  .block {
+    width: 260px;
+  }
+}
+
+@media (max-width: 465px) {
+  .body {
+    flex-direction: column;
+  }
+  .menu-up {
+    display: flex;
+    margin: 20px auto auto auto;
+  }
+  .menu-box {
+    display: none;
   }
 }
