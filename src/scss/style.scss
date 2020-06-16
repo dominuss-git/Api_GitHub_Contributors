@@ -18,13 +18,14 @@ $gold: #d2a749;
 
 .box-user {
   font-size: 100px;
-  padding: 80px 0 0 150px;
+  width: 50%;
+  margin: 80px auto auto 150px;
   display: flex;
   flex-direction: column;
 }
 
-.block {
-  width: 500px;
+.info-block {
+  width: 80%;
   border-radius: 30px;
   background-color: $user-block;
   padding: 11px;
@@ -57,6 +58,11 @@ $gold: #d2a749;
   }
 }
 
+.info {
+  display: none;
+  flex-direction: row;
+}
+
 .bronze {
   color: $bronze;
 }
@@ -69,35 +75,15 @@ $gold: #d2a749;
   color: $gold;
 }
 
-.block:hover {
+.info-block:hover {
   position: relative;
   webkit-box-shadow: 1px 3px 8px 7px $shadow;
   -moz-box-shadow: 1px 3px 8px 7px $shadow;
   box-shadow: 1px 3px 8px 7px $shadow;
-  height: 100px;
   .user-block__status {
     display: block;
   }
-}
-
-.menu-up {
-  display: none;
-  position: relative;
-  flex-direction: column;
-  background-color: $user-block;
-  padding: 20px;
-  margin: 20px auto auto 30px;
-  border-radius: 20px;
-  &__text {
-    text-align: center;
-    white-space: nowrap;
-    color: #fff;
-    font-size: 25px;
-  }
-}
-.menu-up:hover {
-  padding: 0px;
-  .sort-box__field {
+  .info {
     display: flex;
   }
 }
@@ -145,38 +131,20 @@ $gold: #d2a749;
   }
 }
 
-@media (max-width: 850px) {
-  .sort-box {
-    &__field {
-      font-size: 13px;
-    }
+@media(max-width: 845px) {
+  .box-user {
+    margin: 20px;
   }
   .menu-box {
     margin: 20px auto auto auto;
   }
-  .box-user {
-    padding: 20px 0 0 30px;
-  }
 }
 
-@media (max-width: 730px) {
-  .box-user {
-    padding: 20px 0 0 20px;
-  }
-  .block {
-    width: 260px;
-  }
-}
-
-@media (max-width: 465px) {
+@media(max-width: 600px) {
   .body {
     flex-direction: column;
   }
-  .menu-up {
-    display: flex;
-    margin: 20px auto auto auto;
-  }
-  .menu-box {
-    display: none;
+  .box-user {
+    width: 100%;
   }
 }
