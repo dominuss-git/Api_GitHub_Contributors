@@ -132,8 +132,11 @@ const makeForm = (data) => {
         <div class="user-block__status ${status}">$</div>
       </div>
       <div class="info">
+        <div class="info__text">location</div>
         <input class="info__data" value="${data.location}" type="text">
+        <div class="info__text">company</div>
         <input class="info__data" value="${data.company}" type="text">
+        <div class="info__text">email</div>
         <input class="info__data" value="${data.email}" type="text">
       </div>
     </div>`;

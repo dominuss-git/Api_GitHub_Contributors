@@ -4,6 +4,7 @@ $shadow: rgba(0, 0, 0, 0.77);
 $bronze: #9f6c35;
 $silver: #7c7c7c;
 $gold: #d2a749;
+$text: #fff;
 
 * {
   margin: 0px;
@@ -47,7 +48,7 @@ $gold: #d2a749;
     margin: 10px 0 0 10px;
     font-size: 18px;
     white-space: nowrap;
-    color: #fff;
+    color: $text;
   }
   &__status {
     position: absolute;
@@ -60,17 +61,22 @@ $gold: #d2a749;
 
 .info {
   display: none;
-  flex-direction: row;
+  flex-direction: column;
   &__data {
-    color: #fff;
+    color: $text;
     height: 32px;
-    width: 150px;
+    margin: 2px;
+    width: 100%;
     max-width: 350px;
     border: 1px solid $user-block;
     background-color: $background;
     border-right: 0;
-    border-radius: 3px 0 0 3px;
+    border-radius: 20px;
     outline: none;
+  }
+  &__text {
+    color: $text;
+    font-size: 12px;
   }
 }
 
@@ -111,7 +117,7 @@ $gold: #d2a749;
   &__text {
     text-align: center;
     white-space: nowrap;
-    color: #fff;
+    color: $text;
     font-size: 25px;
   }
 }
@@ -124,7 +130,7 @@ $gold: #d2a749;
 
 .sort-box {
   text-align: center;
-  color: #fff;
+  color: $text;
   &__field {
     display: none;
     font-size: 18px;

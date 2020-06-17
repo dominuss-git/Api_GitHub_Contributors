@@ -53,18 +53,23 @@
 
 .info {
   display: none;
-  flex-direction: row;
+  flex-direction: column;
 }
 .info__data {
   color: #fff;
   height: 32px;
-  width: 150px;
+  margin: 2px;
+  width: 100%;
   max-width: 350px;
   border: 1px solid #2f3136;
   background-color: #36393f;
   border-right: 0;
-  border-radius: 3px 0 0 3px;
+  border-radius: 20px;
   outline: none;
+}
+.info__text {
+  color: #fff;
+  font-size: 12px;
 }
 
 .bronze {
