@@ -61,6 +61,17 @@ $gold: #d2a749;
 .info {
   display: none;
   flex-direction: row;
+  &__data {
+    color: #fff;
+    height: 32px;
+    width: 150px;
+    max-width: 350px;
+    border: 1px solid $user-block;
+    background-color: $background;
+    border-right: 0;
+    border-radius: 3px 0 0 3px;
+    outline: none;
+  }
 }
 
 .bronze {

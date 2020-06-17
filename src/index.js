@@ -3,41 +3,50 @@ import "./css/style.css";
 
 let data_array = [];
 
-$(document).ready(function () {
+const init = new Promise((resolve, reject) => {
   $.ajax(
     "https://api.github.com/repos/thomasdavis/backbonetutorials/contributors"
   )
     .then(function (data) {
-      for (let i in data) {
-        data_array.push({
-          login: data[i].login,
-          contributions: data[i].contributions,
-          avatar_url: data[i].avatar_url,
-          company: "",
-          location: "",
-          email: "",
-        });
-      }
+      return data;
     })
-    .then(function () {
-      for (let i in data_array) {
-        $.ajax("https://api.github.com/users/" + data_array[i].login)
-          .then(function (data) {
-            data_array[i].company = data.company;
-            data_array[i].location = data.location;
-            data_array[i].email = data.email;
+    .then(function (data) {
+      for (let i in data) {
+        $.ajax("https://api.github.com/users/" + datay[i].login)
+          .then(function (user_data) {
+            for (let i in data) {
+              data_array.push({
+                login: data[i].login,
+                contributions: data[i].contributions,
+                avatar_url: data[i].avatar_url,
+                company: user_data.company,
+                location: user_data.location,
+                email: user_data.email,
+              });
+            }
           })
           .fail(function (result) {
-            console.log(result);
+            $(".box-user").text("Error : " + result);
+            reject();
           });
       }
-      sort_by_name(data_array);
+      resolve();
     })
     .fail(function (result) {
       $(".box-user").text("Error : " + result);
+      reject();
     });
+  });
 
-  console.log(data_array);
+$(document).ready(() => {
+  init
+    .then(function () {
+      console.log(data_array);
+      sort_by_name(data_array);
+    })
+    .fail((result) => {
+      $(".box-user").text("Error : " + result);
+    });
 });
 
 $("#name").click(function () {
@@ -76,7 +85,7 @@ $("#gold").click(function () {
   $(".box-user").empty();
   for (let i in data_array) {
     if (data_array[i].contributions >= 20) {
-      $(".box-user").append(makeForm(data_array[i].avatar_url));
+      $(".box-user").append(makeForm(data_array[i]));
     }
   }
 });
@@ -106,6 +115,18 @@ const makeForm = (data) => {
   } else {
     status = "gold";
   }
+
+  if(data.location === null) {
+    data.location = "";
+  }
+  if(data.company  === null) {
+    data.company = "";
+  }
+  if(data.email === null) {
+    data.email = "";
+  }
+
+  console.log(data.location);
   return `<div class="info-block">
       <div class="user-block">
         <img class="user-block__img" src=${data.avatar_url}>
@@ -113,7 +134,9 @@ const makeForm = (data) => {
         <div class="user-block__status ${status}">$</div>
       </div>
       <div class="info">
-        <input class="info-block" type="text">${data.location}</input>
+        <input class="info__data" value="${data.location}" type="text">
+        <input class="info__data" value="${data.company}" type="text">
+        <input class="info__data" value="${data.email}" type="text">
       </div>
     </div>`;
 };

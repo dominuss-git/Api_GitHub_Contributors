@@ -55,6 +55,17 @@
   display: none;
   flex-direction: row;
 }
+.info__data {
+  color: #fff;
+  height: 32px;
+  width: 150px;
+  max-width: 350px;
+  border: 1px solid #2f3136;
+  background-color: #36393f;
+  border-right: 0;
+  border-radius: 3px 0 0 3px;
+  outline: none;
+}
 
 .bronze {
   color: #9f6c35;
