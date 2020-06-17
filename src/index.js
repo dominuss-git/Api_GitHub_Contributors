@@ -12,9 +12,8 @@ const init = new Promise((resolve, reject) => {
     })
     .then(function (data) {
       for (let i in data) {
-        $.ajax("https://api.github.com/users/" + datay[i].login)
+        $.ajax("https://api.github.com/users/" + data[i].login)
           .then(function (user_data) {
-            for (let i in data) {
               data_array.push({
                 login: data[i].login,
                 contributions: data[i].contributions,
@@ -22,8 +21,7 @@ const init = new Promise((resolve, reject) => {
                 company: user_data.company,
                 location: user_data.location,
                 email: user_data.email,
-              });
-            }
+            });
           })
           .fail(function (result) {
             $(".box-user").text("Error : " + result);
