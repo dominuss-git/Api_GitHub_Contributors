@@ -3,17 +3,16 @@ import "./css/style.css";
 
 let data_array = [];
 
-const init = new Promise((resolve, reject) => {
+$(document).ready(() => {
   $.ajax(
     "https://api.github.com/repos/thomasdavis/backbonetutorials/contributors"
-  )
-    .then(function (data) {
-      return data;
-    })
-    .then(function (data) {
-      for (let i in data) {
-        $.ajax("https://api.github.com/users/" + data[i].login)
-          .then(function (user_data) {
+  ).then(function (data) {
+    // let promises = [];
+    for (let i in data) {
+      // promises.push(
+        // new Promise((resolve, reject) => {
+          $.ajax("https://api.github.com/users/" + data[i].login)
+            .then(function (user_data) {
               data_array.push({
                 login: data[i].login,
                 contributions: data[i].contributions,
@@ -21,30 +20,27 @@ const init = new Promise((resolve, reject) => {
                 company: user_data.company,
                 location: user_data.location,
                 email: user_data.email,
+              });
+              $(".box-user").append(makeForm(data_array[data_array.length - 1]));
+              // resolve(data_array[data_array.length - 1]);
+            })
+            .fail(function (error) {
+              // reject(error);
+              $(".box-user").text("Error : " + error);
             });
-          })
-          .fail(function (result) {
-            $(".box-user").text("Error : " + result);
-            reject();
-          });
-      }
-      resolve();
-    })
-    .fail(function (result) {
-      $(".box-user").text("Error : " + result);
-      reject();
-    });
+        // })
+      // );
+    }
+    // Promise.all(promises)
+    //   .then((data) => {
+    //     console.log("hello");
+    //     // $(".box-user").empty();
+    //     $(".box-user").append(makeForm(data_array[data_array.length - 1]));
+    //   })
+    //   .catch(function (result) {
+    //     $(".box-user").text("Error : " + result);
+    //   });
   });
-
-$(document).ready(() => {
-  init
-    .then(function () {
-      console.log(data_array);
-      sort_by_name(data_array);
-    })
-    .fail((result) => {
-      $(".box-user").text("Error : " + result);
-    });
 });
 
 $("#name").click(function () {
@@ -114,13 +110,13 @@ const makeForm = (data) => {
     status = "gold";
   }
 
-  if(data.location === null) {
+  if (data.location === null) {
     data.location = "";
   }
-  if(data.company  === null) {
+  if (data.company === null) {
     data.company = "";
   }
-  if(data.email === null) {
+  if (data.email === null) {
     data.email = "";
   }
 
@@ -133,11 +129,11 @@ const makeForm = (data) => {
       </div>
       <div class="info">
         <div class="info__text">location</div>
-        <input class="info__data" value="${data.location}" type="text">
+        <input class="info__data" id="location" value="${data.location}" type="text">
         <div class="info__text">company</div>
-        <input class="info__data" value="${data.company}" type="text">
+        <input class="info__data" id="company" value="${data.company}" type="text">
         <div class="info__text">email</div>
-        <input class="info__data" value="${data.email}" type="text">
+        <input class="info__data" id="email" value="${data.email}" type="text">
       </div>
     </div>`;
 };
