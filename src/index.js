@@ -2,45 +2,55 @@ import $ from "jquery";
 import "./css/style.css";
 
 let data_array = [];
+// let mode = true;
 
 $(document).ready(() => {
   $.ajax(
     "https://api.github.com/repos/thomasdavis/backbonetutorials/contributors"
   ).then(function (data) {
-    // let promises = [];
+    let promises = [];
     for (let i in data) {
-      // promises.push(
-        // new Promise((resolve, reject) => {
-          $.ajax("https://api.github.com/users/" + data[i].login)
-            .then(function (user_data) {
-              data_array.push({
-                login: data[i].login,
-                contributions: data[i].contributions,
-                avatar_url: data[i].avatar_url,
-                company: user_data.company,
-                location: user_data.location,
-                email: user_data.email,
-              });
-              $(".box-user").append(makeForm(data_array[data_array.length - 1]));
-              // resolve(data_array[data_array.length - 1]);
-            })
-            .fail(function (error) {
-              // reject(error);
-              $(".box-user").text("Error : " + error);
-            });
-        // })
-      // );
+      promises.push(
+      new Promise((resolve, reject) => {
+      $.ajax("https://api.github.com/users/" + data[i].login)
+        .then(function (user_data) {
+          data_array.push({
+            login: data[i].login,
+            contributions: data[i].contributions,
+            avatar_url: data[i].avatar_url,
+            company: user_data.company,
+            location: user_data.location,
+            email: user_data.email,
+          });
+          // if (mode === true) {
+            $(".box-user").append(makeForm(data_array[data_array.length - 1]));
+          // }
+          resolve();
+        })
+        .fail(function (error) {
+          reject(error);
+          // mode = false;
+          // $(".box-user").text("Error : " + error);
+        });
+      })
+      );
     }
-    // Promise.all(promises)
-    //   .then((data) => {
-    //     console.log("hello");
-    //     // $(".box-user").empty();
-    //     $(".box-user").append(makeForm(data_array[data_array.length - 1]));
-    //   })
-    //   .catch(function (result) {
-    //     $(".box-user").text("Error : " + result);
-    //   });
-  });
+    Promise.all(promises)
+      .then(() => {
+        // console.log("hello");
+        // $(".box-user").empty();
+        // $(".box-user").append(makeForm(data_array[data_array.length - 1]));
+      })
+      .catch(function (result) {
+        // console.log("Error : " + result.company);
+        $(".box-user").text("Error : " + result);
+        $(".user-info").empty();
+      });
+  })
+  .fail(() => {
+    $(".box-user").text("Error : " + result);
+    $(".user-info").empty();
+  })
 });
 
 $("#name").click(function () {
@@ -120,7 +130,7 @@ const makeForm = (data) => {
     data.email = "";
   }
 
-  console.log(data.location);
+  // console.log(data.location);
   return `<div class="info-block">
       <div class="user-block">
         <img class="user-block__img" src=${data.avatar_url}>
